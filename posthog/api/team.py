@@ -335,7 +335,8 @@ class TeamSerializer(serializers.ModelSerializer, UserPermissionsSerializerMixin
         return team
 
     def _handle_timezone_update(self, team: Team) -> None:
-        # :KLUDGE: This is incorrect as it doesn't wipe caches not currently linked to insights. Fix this some day!
+        # TODO: Remove when legacy insight calculation is no more,
+        # as the HogQL backend's caching always includes timezone in the cache key
         hashes = InsightCachingState.objects.filter(team=team).values_list("cache_key", flat=True)
         cache.delete_many(hashes)
 
