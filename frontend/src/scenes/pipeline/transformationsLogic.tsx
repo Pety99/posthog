@@ -97,14 +97,19 @@ export const pipelineTransformationsLogic = kea<pipelineTransformationsLogicType
                     // See comment in savePluginConfigsOrder about races
                     let order = {}
                     if (enabled) {
-                        const maxOrder = Math.max(...Object.values(values.transformations).map((pc) => pc.order), 0)
-                        order = { order: maxOrder + 1 }
+                        order = { order: values.nextAvailableOrder }
                     }
                     const response = await api.update(`api/plugin_config/${id}`, {
                         enabled,
                         ...order,
                     })
                     return { ...pluginConfigs, [id]: response }
+                },
+                updatePluginConfig: ({ pluginConfig }) => {
+                    return {
+                        ...values.pluginConfigs,
+                        [pluginConfig.id]: pluginConfig,
+                    }
                 },
             },
         ],
@@ -155,6 +160,15 @@ export const pipelineTransformationsLogic = kea<pipelineTransformationsLogicType
             (s) => [s.user],
             (user): boolean => {
                 return !user?.has_seen_product_intro_for?.[ProductKey.PIPELINE_TRANSFORMATIONS]
+            },
+        ],
+        nextAvailableOrder: [
+            (s) => [s.transformations],
+            (transformations): number => {
+                const enabledTransformations = transformations.filter((t) => t.enabled)
+                return enabledTransformations.length > 0
+                    ? Math.max(...enabledTransformations.map((t) => t.order), 0) + 1
+                    : 0
             },
         ],
     }),

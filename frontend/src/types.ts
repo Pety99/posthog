@@ -620,7 +620,7 @@ export enum PipelineStage {
     Transformation = 'transformation',
     Destination = 'destination',
     SiteApp = 'site-app',
-    ImportApp = 'import-app',
+    ImportApp = 'legacy-source',
 }
 
 export enum PipelineNodeTab {
@@ -3710,6 +3710,7 @@ export type BatchExportServiceRedshift = {
 // When adding a new option here also add a icon for it to
 // src/scenes/pipeline/icons/
 // and update RenderBatchExportIcon
+export const BatchExportServiceNames = ['S3', 'Snowflake', 'Postgres', 'BigQuery', 'Redshift', 'HTTP']
 export type BatchExportService =
     | BatchExportServiceS3
     | BatchExportServiceSnowflake

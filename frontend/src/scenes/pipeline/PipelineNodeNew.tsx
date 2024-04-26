@@ -1,17 +1,18 @@
-import { useValues } from 'kea'
+import { useActions, useValues } from 'kea'
 import { NotFound } from 'lib/components/NotFound'
 import { LemonButton } from 'lib/lemon-ui/LemonButton'
+import { LemonMarkdown } from 'lib/lemon-ui/LemonMarkdown'
 import { LemonTable } from 'lib/lemon-ui/LemonTable'
-import { LemonTableLink } from 'lib/lemon-ui/LemonTable/LemonTableLink'
 import { SceneExport } from 'scenes/sceneTypes'
-import { urls } from 'scenes/urls'
 
 import { BatchExportService, PipelineStage, PluginType } from '~/types'
 
 import { pipelineDestinationsLogic } from './destinationsLogic'
 import { frontendAppsLogic } from './frontendAppsLogic'
+import { PipelineBatchExportConfiguration } from './PipelineBatchExportConfiguration'
 import { PIPELINE_TAB_TO_NODE_STAGE } from './PipelineNode'
 import { pipelineNodeNewLogic, PipelineNodeNewLogicProps } from './pipelineNodeNewLogic'
+import { PipelinePluginConfiguration } from './PipelinePluginConfiguration'
 import { pipelineTransformationsLogic } from './transformationsLogic'
 import { RenderApp, RenderBatchExportIcon } from './utils'
 
@@ -48,11 +49,11 @@ interface PluginEntry {
     service: null
 }
 interface BatchExportEntry {
-    id: string
+    id: BatchExportService['type']
     name: string
     description: string | undefined
     plugin: null
-    service: BatchExportService
+    service: BatchExportService['type']
 }
 
 type TableEntry = PluginEntry | BatchExportEntry
@@ -67,20 +68,34 @@ function convertPluginToTableEntry(plugin: PluginType): TableEntry {
     }
 }
 
+function convertBatchExportToTableEntry(service: BatchExportService['type']): TableEntry {
+    return {
+        id: service,
+        name: service,
+        description: `${service} batch export`,
+        plugin: null,
+        service: service,
+    }
+}
+
 export function PipelineNodeNew(
     params: { stage?: string; pluginIdOrBatchExportDestination?: string } = {}
 ): JSX.Element {
     const { stage, pluginId, batchExportDestination } = paramsToProps({ params })
+    const { batchExportServiceNames } = useValues(pipelineNodeNewLogic)
 
     if (!stage) {
         return <NotFound object="pipeline app stage" />
     }
 
     if (pluginId) {
-        return <>Plugin ID {pluginId}</>
+        return <PipelinePluginConfiguration stage={stage} pluginId={pluginId} />
     }
     if (batchExportDestination) {
-        return <>Batch Export Destination {batchExportDestination}</>
+        if (stage !== PipelineStage.Destination) {
+            return <NotFound object={batchExportDestination} />
+        }
+        return <PipelineBatchExportConfiguration service={batchExportDestination} />
     }
 
     if (stage === PipelineStage.Transformation) {
@@ -90,9 +105,9 @@ export function PipelineNodeNew(
         return nodeOptionsTable(stage, targets, loading)
     } else if (stage === PipelineStage.Destination) {
         const { plugins, loading } = useValues(pipelineDestinationsLogic)
-        // Show a list of destinations - TODO: add batch export destinations too
-        const targets = Object.values(plugins).map(convertPluginToTableEntry)
-        return nodeOptionsTable(stage, targets, loading)
+        const pluginTargets = Object.values(plugins).map(convertPluginToTableEntry)
+        const batchExportTargets = Object.values(batchExportServiceNames).map(convertBatchExportToTableEntry)
+        return nodeOptionsTable(stage, [...batchExportTargets, ...pluginTargets], loading)
     } else if (stage === PipelineStage.SiteApp) {
         const { plugins, loading } = useValues(frontendAppsLogic)
         const targets = Object.values(plugins).map(convertPluginToTableEntry)
@@ -102,6 +117,8 @@ export function PipelineNodeNew(
 }
 
 function nodeOptionsTable(stage: PipelineStage, targets: TableEntry[], loading: boolean): JSX.Element {
+    const { createNewButtonPressed } = useActions(pipelineNodeNewLogic)
+
     return (
         <>
             <LemonTable
@@ -112,13 +129,21 @@ function nodeOptionsTable(stage: PipelineStage, targets: TableEntry[], loading: 
                     {
                         title: 'Name',
                         sticky: true,
-                        render: function RenderPluginName(_, target) {
+                        render: function RenderName(_, target) {
                             return (
-                                <LemonTableLink
-                                    to={urls.pipelineNodeNew(stage, target.id)}
-                                    title={target.name}
-                                    description={target.description}
-                                />
+                                <div className="flex flex-col py-1">
+                                    <div className="flex flex-row items-center font-bold text-sm gap-1">
+                                        {target.name}
+                                    </div>
+
+                                    {target.description ? (
+                                        <div className="text-default text-xs text-text-secondary-3000 mt-1">
+                                            <LemonMarkdown className="max-w-[30rem]" lowKeyHeadings>
+                                                {target.description}
+                                            </LemonMarkdown>
+                                        </div>
+                                    ) : null}
+                                </div>
                             )
                         },
                     },
@@ -128,7 +153,7 @@ function nodeOptionsTable(stage: PipelineStage, targets: TableEntry[], loading: 
                             if (target.plugin) {
                                 return <RenderApp plugin={target.plugin} />
                             }
-                            return <RenderBatchExportIcon type={target.service.type} />
+                            return <RenderBatchExportIcon type={target.service} />
                         },
                     },
                     {
@@ -140,7 +165,8 @@ function nodeOptionsTable(stage: PipelineStage, targets: TableEntry[], loading: 
                                 <LemonButton
                                     type="primary"
                                     data-attr={`new-${stage}-${target.id}`}
-                                    to={urls.pipelineNodeNew(stage, target.id)}
+                                    onClick={() => createNewButtonPressed(stage, target.id)}
+                                    // to={urls.pipelineNodeNew(stage, target.id)}
                                 >
                                     Create
                                 </LemonButton>

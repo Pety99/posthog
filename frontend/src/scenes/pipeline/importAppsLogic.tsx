@@ -58,6 +58,12 @@ export const importAppsLogic = kea<importAppsLogicType>([
                     })
                     return { ...pluginConfigs, [id]: response }
                 },
+                updatePluginConfig: ({ pluginConfig }) => {
+                    return {
+                        ...values.pluginConfigs,
+                        [pluginConfig.id]: pluginConfig,
+                    }
+                },
             },
         ],
     })),
