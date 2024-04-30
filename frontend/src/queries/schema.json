@@ -513,70 +513,1066 @@
             "type": "object"
         },
         "CachedQueryResponse": {
-            "additionalProperties": false,
-            "properties": {
-                "cache_key": {
-                    "type": "string"
-                },
-                "columns": {
-                    "items": {
-                        "type": "string"
+            "anyOf": [
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "$ref": "#/definitions/EventType"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
                     },
-                    "type": "array"
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
                 },
-                "hasMore": {
-                    "type": "boolean"
-                },
-                "hogql": {
-                    "type": "string"
-                },
-                "is_cached": {
-                    "type": "boolean"
-                },
-                "last_refresh": {
-                    "type": "string"
-                },
-                "limit": {
-                    "type": "integer"
-                },
-                "modifiers": {
-                    "$ref": "#/definitions/HogQLQueryModifiers"
-                },
-                "next_allowed_client_refresh": {
-                    "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
-                },
-                "results": {},
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
-                "timezone": {
-                    "type": "string"
-                },
-                "timings": {
-                    "items": {
-                        "$ref": "#/definitions/QueryTiming"
+                {
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
                     },
-                    "type": "array"
+                    "required": ["cache_key", "is_cached", "last_refresh", "next_allowed_client_refresh", "timezone"],
+                    "type": "object"
                 },
-                "types": {
-                    "items": {
-                        "type": "string"
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
                     },
-                    "type": "array"
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "columns": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "hasMore": {
+                            "type": "boolean"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "limit": {
+                            "type": "integer"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "offset": {
+                            "type": "integer"
+                        },
+                        "results": {
+                            "items": {
+                                "items": {},
+                                "type": "array"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        },
+                        "types": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "columns",
+                        "hogql",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone",
+                        "types"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "columns": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "hasMore": {
+                            "type": "boolean"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "limit": {
+                            "type": "integer"
+                        },
+                        "missing_actors_count": {
+                            "type": "integer"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "offset": {
+                            "type": "integer"
+                        },
+                        "results": {
+                            "items": {
+                                "items": {},
+                                "type": "array"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        },
+                        "types": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "columns",
+                        "hogql",
+                        "is_cached",
+                        "last_refresh",
+                        "limit",
+                        "next_allowed_client_refresh",
+                        "offset",
+                        "results",
+                        "timezone",
+                        "types"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "breakdown": {
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/BreakdownValueInt"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": ["label", "value"],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "compare": {
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["label", "value"],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "day": {
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "anyOf": [
+                                            {
+                                                "type": "string"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/DatetimeDay"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/Day"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": ["label", "value"],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "interval": {
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "description": "An interval selected out of available intervals in source query",
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": ["label", "value"],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "series": {
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": ["label", "value"],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "status": {
+                            "items": {
+                                "additionalProperties": false,
+                                "properties": {
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": ["label", "value"],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["cache_key", "is_cached", "last_refresh", "next_allowed_client_refresh", "timezone"],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "hasMore": {
+                            "type": "boolean"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "$ref": "#/definitions/TimelineEntry"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "clickhouse": {
+                            "description": "Executed ClickHouse query",
+                            "type": "string"
+                        },
+                        "columns": {
+                            "description": "Returned columns",
+                            "items": {},
+                            "type": "array"
+                        },
+                        "error": {
+                            "description": "Query error. Returned only if 'explain' is true. Throws an error otherwise.",
+                            "type": "string"
+                        },
+                        "explain": {
+                            "description": "Query explanation output",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "hasMore": {
+                            "type": "boolean"
+                        },
+                        "hogql": {
+                            "description": "Generated HogQL query",
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "limit": {
+                            "type": "integer"
+                        },
+                        "metadata": {
+                            "$ref": "#/definitions/HogQLMetadataResponse",
+                            "description": "Query metadata output"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers",
+                            "description": "Modifiers used when performing the query"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "offset": {
+                            "type": "integer"
+                        },
+                        "query": {
+                            "description": "Input query string",
+                            "type": "string"
+                        },
+                        "results": {
+                            "description": "Query results",
+                            "items": {},
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "description": "Measured timings for different parts of the query generation process",
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        },
+                        "types": {
+                            "description": "Types of returned columns",
+                            "items": {},
+                            "type": "array"
+                        }
+                    },
+                    "required": ["cache_key", "is_cached", "last_refresh", "next_allowed_client_refresh", "timezone"],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "errors": {
+                            "items": {
+                                "$ref": "#/definitions/HogQLNotice"
+                            },
+                            "type": "array"
+                        },
+                        "inputExpr": {
+                            "type": "string"
+                        },
+                        "inputSelect": {
+                            "type": "string"
+                        },
+                        "isValid": {
+                            "type": "boolean"
+                        },
+                        "isValidView": {
+                            "type": "boolean"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "notices": {
+                            "items": {
+                                "$ref": "#/definitions/HogQLNotice"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "warnings": {
+                            "items": {
+                                "$ref": "#/definitions/HogQLNotice"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "errors",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "notices",
+                        "timezone",
+                        "warnings"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "incomplete_list": {
+                            "description": "Whether or not the suggestions returned are complete",
+                            "type": "boolean"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "suggestions": {
+                            "items": {
+                                "$ref": "#/definitions/AutocompleteCompletionItem"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "description": "Measured timings for different parts of the query generation process",
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "incomplete_list",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "suggestions",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "$ref": "#/definitions/WebOverviewItem"
+                            },
+                            "type": "array"
+                        },
+                        "samplingRate": {
+                            "$ref": "#/definitions/SamplingRate"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "columns": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "hasMore": {
+                            "type": "boolean"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "limit": {
+                            "type": "integer"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "offset": {
+                            "type": "integer"
+                        },
+                        "results": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "samplingRate": {
+                            "$ref": "#/definitions/SamplingRate"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        },
+                        "types": {
+                            "items": {},
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "columns": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "samplingRate": {
+                            "$ref": "#/definitions/SamplingRate"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        },
+                        "types": {
+                            "items": {},
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "$ref": "#/definitions/RetentionResult"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "results": {
+                            "items": {
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": false,
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "columns": {
+                            "items": {},
+                            "type": "array"
+                        },
+                        "hasMore": {
+                            "type": "boolean"
+                        },
+                        "hogql": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "limit": {
+                            "type": "integer"
+                        },
+                        "modifiers": {
+                            "$ref": "#/definitions/HogQLQueryModifiers"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "offset": {
+                            "type": "integer"
+                        },
+                        "results": {
+                            "$ref": "#/definitions/FunnelCorrelationResult"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        },
+                        "timings": {
+                            "items": {
+                                "$ref": "#/definitions/QueryTiming"
+                            },
+                            "type": "array"
+                        },
+                        "types": {
+                            "items": {},
+                            "type": "array"
+                        }
+                    },
+                    "required": [
+                        "cache_key",
+                        "is_cached",
+                        "last_refresh",
+                        "next_allowed_client_refresh",
+                        "results",
+                        "timezone"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "additionalProperties": {
+                        "type": "array"
+                    },
+                    "properties": {
+                        "cache_key": {
+                            "type": "string"
+                        },
+                        "is_cached": {
+                            "type": "boolean"
+                        },
+                        "last_refresh": {
+                            "type": "string"
+                        },
+                        "next_allowed_client_refresh": {
+                            "type": "string"
+                        },
+                        "timezone": {
+                            "type": "string"
+                        }
+                    },
+                    "required": ["cache_key", "is_cached", "last_refresh", "next_allowed_client_refresh", "timezone"],
+                    "type": "object"
                 }
-            },
-            "required": [
-                "cache_key",
-                "is_cached",
-                "last_refresh",
-                "next_allowed_client_refresh",
-                "results",
-                "timezone"
-            ],
-            "type": "object"
+            ]
         },
         "ChartAxis": {
             "additionalProperties": false,
@@ -2412,15 +3408,6 @@
         "FunnelsQueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -2430,17 +3417,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "anyOf": [
@@ -2458,18 +3439,9 @@
                         }
                     ]
                 },
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -3375,15 +4347,6 @@
         "LifecycleQueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -3393,17 +4356,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "items": {
@@ -3411,18 +4368,9 @@
                     },
                     "type": "array"
                 },
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -3698,15 +4646,6 @@
         "PathsQueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -3716,17 +4655,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "items": {
@@ -3734,18 +4667,9 @@
                     },
                     "type": "array"
                 },
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -3956,15 +4880,6 @@
         "QueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -3974,31 +4889,16 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
                 },
-                "offset": {
-                    "type": "integer"
-                },
                 "results": {},
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -4410,15 +5310,6 @@
                 {
                     "additionalProperties": false,
                     "properties": {
-                        "columns": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array"
-                        },
-                        "hasMore": {
-                            "type": "boolean"
-                        },
                         "hogql": {
                             "type": "string"
                         },
@@ -4428,17 +5319,11 @@
                         "last_refresh": {
                             "type": "string"
                         },
-                        "limit": {
-                            "type": "integer"
-                        },
                         "modifiers": {
                             "$ref": "#/definitions/HogQLQueryModifiers"
                         },
                         "next_allowed_client_refresh": {
                             "type": "string"
-                        },
-                        "offset": {
-                            "type": "integer"
                         },
                         "results": {
                             "items": {
@@ -4454,12 +5339,6 @@
                                 "$ref": "#/definitions/QueryTiming"
                             },
                             "type": "array"
-                        },
-                        "types": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array"
                         }
                     },
                     "required": ["results"],
@@ -4524,9 +5403,6 @@
                             "items": {},
                             "type": "array"
                         },
-                        "hasMore": {
-                            "type": "boolean"
-                        },
                         "hogql": {
                             "type": "string"
                         },
@@ -4536,17 +5412,11 @@
                         "last_refresh": {
                             "type": "string"
                         },
-                        "limit": {
-                            "type": "integer"
-                        },
                         "modifiers": {
                             "$ref": "#/definitions/HogQLQueryModifiers"
                         },
                         "next_allowed_client_refresh": {
                             "type": "string"
-                        },
-                        "offset": {
-                            "type": "integer"
                         },
                         "results": {
                             "items": {},
@@ -4572,15 +5442,6 @@
                 {
                     "additionalProperties": false,
                     "properties": {
-                        "columns": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array"
-                        },
-                        "hasMore": {
-                            "type": "boolean"
-                        },
                         "hogql": {
                             "type": "string"
                         },
@@ -4590,17 +5451,11 @@
                         "last_refresh": {
                             "type": "string"
                         },
-                        "limit": {
-                            "type": "integer"
-                        },
                         "modifiers": {
                             "$ref": "#/definitions/HogQLQueryModifiers"
                         },
                         "next_allowed_client_refresh": {
                             "type": "string"
-                        },
-                        "offset": {
-                            "type": "integer"
                         },
                         "results": {
                             "items": {
@@ -4608,18 +5463,9 @@
                             },
                             "type": "array"
                         },
-                        "samplingRate": {
-                            "$ref": "#/definitions/SamplingRate"
-                        },
                         "timings": {
                             "items": {
                                 "$ref": "#/definitions/QueryTiming"
-                            },
-                            "type": "array"
-                        },
-                        "types": {
-                            "items": {
-                                "type": "string"
                             },
                             "type": "array"
                         }
@@ -4630,15 +5476,6 @@
                 {
                     "additionalProperties": false,
                     "properties": {
-                        "columns": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array"
-                        },
-                        "hasMore": {
-                            "type": "boolean"
-                        },
                         "hogql": {
                             "type": "string"
                         },
@@ -4648,17 +5485,11 @@
                         "last_refresh": {
                             "type": "string"
                         },
-                        "limit": {
-                            "type": "integer"
-                        },
                         "modifiers": {
                             "$ref": "#/definitions/HogQLQueryModifiers"
                         },
                         "next_allowed_client_refresh": {
                             "type": "string"
-                        },
-                        "offset": {
-                            "type": "integer"
                         },
                         "results": {
                             "items": {
@@ -4666,18 +5497,9 @@
                             },
                             "type": "array"
                         },
-                        "samplingRate": {
-                            "$ref": "#/definitions/SamplingRate"
-                        },
                         "timings": {
                             "items": {
                                 "$ref": "#/definitions/QueryTiming"
-                            },
-                            "type": "array"
-                        },
-                        "types": {
-                            "items": {
-                                "type": "string"
                             },
                             "type": "array"
                         }
@@ -4688,15 +5510,6 @@
                 {
                     "additionalProperties": false,
                     "properties": {
-                        "columns": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array"
-                        },
-                        "hasMore": {
-                            "type": "boolean"
-                        },
                         "hogql": {
                             "type": "string"
                         },
@@ -4706,17 +5519,11 @@
                         "last_refresh": {
                             "type": "string"
                         },
-                        "limit": {
-                            "type": "integer"
-                        },
                         "modifiers": {
                             "$ref": "#/definitions/HogQLQueryModifiers"
                         },
                         "next_allowed_client_refresh": {
                             "type": "string"
-                        },
-                        "offset": {
-                            "type": "integer"
                         },
                         "results": {
                             "items": {
@@ -4724,18 +5531,9 @@
                             },
                             "type": "array"
                         },
-                        "samplingRate": {
-                            "$ref": "#/definitions/SamplingRate"
-                        },
                         "timings": {
                             "items": {
                                 "$ref": "#/definitions/QueryTiming"
-                            },
-                            "type": "array"
-                        },
-                        "types": {
-                            "items": {
-                                "type": "string"
                             },
                             "type": "array"
                         }
@@ -4746,15 +5544,6 @@
                 {
                     "additionalProperties": false,
                     "properties": {
-                        "columns": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array"
-                        },
-                        "hasMore": {
-                            "type": "boolean"
-                        },
                         "hogql": {
                             "type": "string"
                         },
@@ -4764,17 +5553,11 @@
                         "last_refresh": {
                             "type": "string"
                         },
-                        "limit": {
-                            "type": "integer"
-                        },
                         "modifiers": {
                             "$ref": "#/definitions/HogQLQueryModifiers"
                         },
                         "next_allowed_client_refresh": {
                             "type": "string"
-                        },
-                        "offset": {
-                            "type": "integer"
                         },
                         "results": {
                             "items": {
@@ -4782,18 +5565,9 @@
                             },
                             "type": "array"
                         },
-                        "samplingRate": {
-                            "$ref": "#/definitions/SamplingRate"
-                        },
                         "timings": {
                             "items": {
                                 "$ref": "#/definitions/QueryTiming"
-                            },
-                            "type": "array"
-                        },
-                        "types": {
-                            "items": {
-                                "type": "string"
                             },
                             "type": "array"
                         }
@@ -5169,15 +5943,6 @@
         "RetentionQueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -5187,17 +5952,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "items": {
@@ -5205,18 +5964,9 @@
                     },
                     "type": "array"
                 },
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -5590,15 +6340,6 @@
         "StickinessQueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -5608,17 +6349,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "items": {
@@ -5626,18 +6361,9 @@
                     },
                     "type": "array"
                 },
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -5951,15 +6677,6 @@
         "TrendsQueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -5969,17 +6686,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "items": {
@@ -5987,18 +6698,9 @@
                     },
                     "type": "array"
                 },
-                "samplingRate": {
-                    "$ref": "#/definitions/SamplingRate"
-                },
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -6160,15 +6862,6 @@
         "WebOverviewQueryResponse": {
             "additionalProperties": false,
             "properties": {
-                "columns": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -6178,17 +6871,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "items": {
@@ -6202,12 +6889,6 @@
                 "timings": {
                     "items": {
                         "$ref": "#/definitions/QueryTiming"
-                    },
-                    "type": "array"
-                },
-                "types": {
-                    "items": {
-                        "type": "string"
                     },
                     "type": "array"
                 }
@@ -6386,9 +7067,6 @@
                     "items": {},
                     "type": "array"
                 },
-                "hasMore": {
-                    "type": "boolean"
-                },
                 "hogql": {
                     "type": "string"
                 },
@@ -6398,17 +7076,11 @@
                 "last_refresh": {
                     "type": "string"
                 },
-                "limit": {
-                    "type": "integer"
-                },
                 "modifiers": {
                     "$ref": "#/definitions/HogQLQueryModifiers"
                 },
                 "next_allowed_client_refresh": {
                     "type": "string"
-                },
-                "offset": {
-                    "type": "integer"
                 },
                 "results": {
                     "items": {},

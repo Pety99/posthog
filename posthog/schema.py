@@ -119,6 +119,74 @@ class CacheMissResponse(BaseModel):
     cache_key: Optional[str] = None
 
 
+class CachedQueryResponse2(BaseModel):
+    cache_key: str
+    is_cached: bool
+    last_refresh: str
+    next_allowed_client_refresh: str
+    timezone: str
+
+
+class CachedQueryResponse3(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    is_cached: bool
+    last_refresh: str
+    next_allowed_client_refresh: str
+    results: list[dict[str, Any]]
+    timezone: str
+
+
+class BreakdownItem(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: str
+    value: Union[str, int]
+
+
+class CompareItem(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: str
+    value: str
+
+
+class IntervalItem(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: str
+    value: int = Field(..., description="An interval selected out of available intervals in source query")
+
+
+class Series(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: str
+    value: int
+
+
+class StatusItem(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    label: str
+    value: str
+
+
+class CachedQueryResponse19(BaseModel):
+    cache_key: str
+    is_cached: bool
+    last_refresh: str
+    next_allowed_client_refresh: str
+    timezone: str
+
+
 class ChartAxis(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -452,52 +520,12 @@ class Compare(str, Enum):
     previous = "previous"
 
 
-class BreakdownItem(BaseModel):
-    model_config = ConfigDict(
-        extra="forbid",
-    )
-    label: str
-    value: Union[str, int]
-
-
-class CompareItem(BaseModel):
-    model_config = ConfigDict(
-        extra="forbid",
-    )
-    label: str
-    value: str
-
-
 class DayItem(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
     label: str
     value: Union[str, AwareDatetime, int]
-
-
-class IntervalItem(BaseModel):
-    model_config = ConfigDict(
-        extra="forbid",
-    )
-    label: str
-    value: int = Field(..., description="An interval selected out of available intervals in source query")
-
-
-class Series(BaseModel):
-    model_config = ConfigDict(
-        extra="forbid",
-    )
-    label: str
-    value: int
-
-
-class StatusItem(BaseModel):
-    model_config = ConfigDict(
-        extra="forbid",
-    )
-    label: str
-    value: str
 
 
 class InsightActorsQueryOptionsResponse(BaseModel):
@@ -865,19 +893,13 @@ class StickinessQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[dict[str, Any]]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class TimeToSeeDataQuery(BaseModel):
@@ -965,19 +987,13 @@ class TrendsQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[dict[str, Any]]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class ActionsPie(BaseModel):
@@ -1035,19 +1051,14 @@ class WebOverviewQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[WebOverviewItem]
     samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class WebStatsBreakdown(str, Enum):
@@ -1093,14 +1104,11 @@ class WebTopClicksQueryResponse(BaseModel):
         extra="forbid",
     )
     columns: Optional[list] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list
     samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
@@ -1154,12 +1162,148 @@ class BreakdownFilter(BaseModel):
     breakdowns: Optional[list[Breakdown]] = None
 
 
-class CachedQueryResponse(BaseModel):
+class CachedQueryResponse1(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
     cache_key: str
-    columns: Optional[list[str]] = None
+    is_cached: bool
+    last_refresh: str
+    next: Optional[str] = None
+    next_allowed_client_refresh: str
+    results: list[EventType]
+    timezone: str
+
+
+class CachedQueryResponse4(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    columns: list
+    hasMore: Optional[bool] = None
+    hogql: str
+    is_cached: bool
+    last_refresh: str
+    limit: Optional[int] = None
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: str
+    offset: Optional[int] = None
+    results: list[list]
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+    types: list[str]
+
+
+class CachedQueryResponse5(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    columns: list
+    hasMore: Optional[bool] = None
+    hogql: str
+    is_cached: bool
+    last_refresh: str
+    limit: int
+    missing_actors_count: Optional[int] = None
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: str
+    offset: int
+    results: list[list]
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+    types: list[str]
+
+
+class CachedQueryResponse6(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    breakdown: Optional[list[BreakdownItem]] = None
+    cache_key: str
+    compare: Optional[list[CompareItem]] = None
+    day: Optional[list[DayItem]] = None
+    interval: Optional[list[IntervalItem]] = None
+    is_cached: bool
+    last_refresh: str
+    next_allowed_client_refresh: str
+    series: Optional[list[Series]] = None
+    status: Optional[list[StatusItem]] = None
+    timezone: str
+
+
+class CachedQueryResponse7(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    hasMore: Optional[bool] = None
+    hogql: Optional[str] = None
+    is_cached: bool
+    last_refresh: str
+    next_allowed_client_refresh: str
+    results: list[TimelineEntry]
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+
+
+class CachedQueryResponse9(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    errors: list[HogQLNotice]
+    inputExpr: Optional[str] = None
+    inputSelect: Optional[str] = None
+    isValid: Optional[bool] = None
+    isValidView: Optional[bool] = None
+    is_cached: bool
+    last_refresh: str
+    next_allowed_client_refresh: str
+    notices: list[HogQLNotice]
+    timezone: str
+    warnings: list[HogQLNotice]
+
+
+class CachedQueryResponse10(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    incomplete_list: bool = Field(..., description="Whether or not the suggestions returned are complete")
+    is_cached: bool
+    last_refresh: str
+    next_allowed_client_refresh: str
+    suggestions: list[AutocompleteCompletionItem]
+    timezone: str
+    timings: Optional[list[QueryTiming]] = Field(
+        default=None, description="Measured timings for different parts of the query generation process"
+    )
+
+
+class CachedQueryResponse11(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    hogql: Optional[str] = None
+    is_cached: bool
+    last_refresh: str
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: str
+    results: list[WebOverviewItem]
+    samplingRate: Optional[SamplingRate] = None
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+
+
+class CachedQueryResponse12(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    columns: Optional[list] = None
     hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: bool
@@ -1168,11 +1312,64 @@ class CachedQueryResponse(BaseModel):
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: str
     offset: Optional[int] = None
-    results: Any
+    results: list
     samplingRate: Optional[SamplingRate] = None
     timezone: str
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
+    types: Optional[list] = None
+
+
+class CachedQueryResponse13(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    columns: Optional[list] = None
+    hogql: Optional[str] = None
+    is_cached: bool
+    last_refresh: str
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: str
+    results: list
+    samplingRate: Optional[SamplingRate] = None
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+    types: Optional[list] = None
+
+
+class CachedQueryResponse14(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    hogql: Optional[str] = None
+    is_cached: bool
+    last_refresh: str
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: str
+    results: list[dict[str, Any]]
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+
+
+class CachedQueryResponse18(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    columns: Optional[list] = None
+    hasMore: Optional[bool] = None
+    hogql: Optional[str] = None
+    is_cached: bool
+    last_refresh: str
+    limit: Optional[int] = None
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: str
+    offset: Optional[int] = None
+    results: FunnelCorrelationResult
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+    types: Optional[list] = None
 
 
 class DataNode(BaseModel):
@@ -1304,19 +1501,13 @@ class FunnelsQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: Union[FunnelTimeToConvertResults, list[dict[str, Any]], list[list[dict[str, Any]]]]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class GroupPropertyFilter(BaseModel):
@@ -1422,19 +1613,13 @@ class LifecycleQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[dict[str, Any]]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class Node(BaseModel):
@@ -1448,19 +1633,13 @@ class PathsQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[dict[str, Any]]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class PersonPropertyFilter(BaseModel):
@@ -1478,19 +1657,13 @@ class QueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: Any
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class QueryResponseAlternative3(BaseModel):
@@ -1575,19 +1748,14 @@ class QueryResponseAlternative10(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[WebOverviewItem]
     samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class QueryResponseAlternative11(BaseModel):
@@ -1609,23 +1777,33 @@ class QueryResponseAlternative11(BaseModel):
     types: Optional[list] = None
 
 
+class QueryResponseAlternative12(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    columns: Optional[list] = None
+    hogql: Optional[str] = None
+    is_cached: Optional[bool] = None
+    last_refresh: Optional[str] = None
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: Optional[str] = None
+    results: list
+    samplingRate: Optional[SamplingRate] = None
+    timings: Optional[list[QueryTiming]] = None
+    types: Optional[list] = None
+
+
 class QueryResponseAlternative13(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[dict[str, Any]]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class QueryResponseAlternative17(BaseModel):
@@ -1839,6 +2017,96 @@ class AnyResponseType(
         HogQLAutocompleteResponse,
         Union[AnyResponseType1, Any],
         EventsQueryResponse,
+    ]
+
+
+class CachedQueryResponse8(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    clickhouse: Optional[str] = Field(default=None, description="Executed ClickHouse query")
+    columns: Optional[list] = Field(default=None, description="Returned columns")
+    error: Optional[str] = Field(
+        default=None, description="Query error. Returned only if 'explain' is true. Throws an error otherwise."
+    )
+    explain: Optional[list[str]] = Field(default=None, description="Query explanation output")
+    hasMore: Optional[bool] = None
+    hogql: Optional[str] = Field(default=None, description="Generated HogQL query")
+    is_cached: bool
+    last_refresh: str
+    limit: Optional[int] = None
+    metadata: Optional[HogQLMetadataResponse] = Field(default=None, description="Query metadata output")
+    modifiers: Optional[HogQLQueryModifiers] = Field(
+        default=None, description="Modifiers used when performing the query"
+    )
+    next_allowed_client_refresh: str
+    offset: Optional[int] = None
+    query: Optional[str] = Field(default=None, description="Input query string")
+    results: Optional[list] = Field(default=None, description="Query results")
+    timezone: str
+    timings: Optional[list[QueryTiming]] = Field(
+        default=None, description="Measured timings for different parts of the query generation process"
+    )
+    types: Optional[list] = Field(default=None, description="Types of returned columns")
+
+
+class CachedQueryResponse15(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    cache_key: str
+    hogql: Optional[str] = None
+    is_cached: bool
+    last_refresh: str
+    modifiers: Optional[HogQLQueryModifiers] = None
+    next_allowed_client_refresh: str
+    results: list[RetentionResult]
+    timezone: str
+    timings: Optional[list[QueryTiming]] = None
+
+
+class CachedQueryResponse(
+    RootModel[
+        Union[
+            CachedQueryResponse1,
+            CachedQueryResponse2,
+            CachedQueryResponse3,
+            CachedQueryResponse4,
+            CachedQueryResponse5,
+            CachedQueryResponse6,
+            CachedQueryResponse7,
+            CachedQueryResponse8,
+            CachedQueryResponse9,
+            CachedQueryResponse10,
+            CachedQueryResponse11,
+            CachedQueryResponse12,
+            CachedQueryResponse13,
+            CachedQueryResponse14,
+            CachedQueryResponse15,
+            CachedQueryResponse18,
+            CachedQueryResponse19,
+        ]
+    ]
+):
+    root: Union[
+        CachedQueryResponse1,
+        CachedQueryResponse2,
+        CachedQueryResponse3,
+        CachedQueryResponse4,
+        CachedQueryResponse5,
+        CachedQueryResponse6,
+        CachedQueryResponse7,
+        CachedQueryResponse8,
+        CachedQueryResponse9,
+        CachedQueryResponse10,
+        CachedQueryResponse11,
+        CachedQueryResponse12,
+        CachedQueryResponse13,
+        CachedQueryResponse14,
+        CachedQueryResponse15,
+        CachedQueryResponse18,
+        CachedQueryResponse19,
     ]
 
 
@@ -2376,19 +2644,13 @@ class QueryResponseAlternative14(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[RetentionResult]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class QueryResponseAlternative(
@@ -2406,6 +2668,7 @@ class QueryResponseAlternative(
             QueryResponseAlternative9,
             QueryResponseAlternative10,
             QueryResponseAlternative11,
+            QueryResponseAlternative12,
             QueryResponseAlternative13,
             QueryResponseAlternative14,
             QueryResponseAlternative17,
@@ -2426,6 +2689,7 @@ class QueryResponseAlternative(
         QueryResponseAlternative9,
         QueryResponseAlternative10,
         QueryResponseAlternative11,
+        QueryResponseAlternative12,
         QueryResponseAlternative13,
         QueryResponseAlternative14,
         QueryResponseAlternative17,
@@ -2437,19 +2701,13 @@ class RetentionQueryResponse(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    columns: Optional[list[str]] = None
-    hasMore: Optional[bool] = None
     hogql: Optional[str] = None
     is_cached: Optional[bool] = None
     last_refresh: Optional[str] = None
-    limit: Optional[int] = None
     modifiers: Optional[HogQLQueryModifiers] = None
     next_allowed_client_refresh: Optional[str] = None
-    offset: Optional[int] = None
     results: list[RetentionResult]
-    samplingRate: Optional[SamplingRate] = None
     timings: Optional[list[QueryTiming]] = None
-    types: Optional[list[str]] = None
 
 
 class SessionsTimelineQuery(BaseModel):
